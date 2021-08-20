@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="notorious.qibible">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.NoActionBar">
+        <activity android:name=".activiteListCoin.ResultCoinActivity"></activity>
+        <activity android:name=".activiteListCoin.MarcActivity" />
+        <activity android:name=".activiteListCoin.JeanActivity" />
+        <activity android:name=".activiteListCoin.ResultActivity" />
+        <activity android:name=".activiteListCoin.CultureGeneralActivity" />
+        <activity android:name=".TimerActivity" />
+        <activity android:name=".activiteListCoin.GeneseActivity" /> <!-- <activity -->
+        <!-- android:name=".coin.BookActivity" -->
+        <!-- android:screenOrientation="portrait" /> -->
+        <activity
+            android:name=".coin.MenuCoinActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MenuActivityHome"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity> <!-- <activity android:name=".HomeScreen"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- </intent-filter> -->
+        <!-- </activity> -->
+        <activity
+            android:name=".PlayAgain"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".GameWon"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainGameActivity"
+            android:screenOrientation="portrait" /> <!-- <activity android:name=".MainGameActivityDebutant" /> -->
+        <activity
+            android:name=".Time_Up"
+            android:screenOrientation="portrait" />
+    </application>
+
+</manifest>

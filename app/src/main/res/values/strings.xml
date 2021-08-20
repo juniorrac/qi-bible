@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">QI Bible</string>
+    <string name="play_again">Jouez encore</string>
+    <string name="time">15</string>
+    <string name="correct">Correcte</string>
+    <string name="wrongans">Ops reponse fausse</string>
+    <string name="timeup">Time Up</string>
+    <string name="play_game">Jouez a QI Bible</string>
+    <string name="quit">Quitter</string>
+    <string name="next">Suivant</string>
+    <string name="cancel">✖</string>
+    <string name="question">Question</string>
+    <string name="answer3">Answer3</string>
+    <string name="answer4">Answer4</string>
+    <string name="answer2">Answer2</string>
+    <string name="coin">Coin</string>
+    <string name="answer1">Answer1</string>
+</resources>
