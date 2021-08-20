@@ -3,8 +3,6 @@
 - modify by rene andre Coly
 - software enginer
 
-# Usage
-- Import the Qi game into Android studio.
 
 # Features
 - quizz (General knowledge).
