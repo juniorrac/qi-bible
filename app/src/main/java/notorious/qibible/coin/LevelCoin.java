@@ -7,6 +7,8 @@ public class LevelCoin {
     private String Category ;
     private String Description ;
     private int Thumbnail ;
+    private boolean isUnlocked ;
+    private int unlockCost ;
 
 //    private int id;
 //    private String question;
@@ -31,6 +33,17 @@ public class LevelCoin {
         Category = category;
         Description = description;
         Thumbnail = thumbnail;
+        isUnlocked = true; // Par défaut débloqué
+        unlockCost = 0;
+    }
+
+    public LevelCoin(String title, String category, String description, int thumbnail, boolean unlocked, int cost) {
+        Title = title;
+        Category = category;
+        Description = description;
+        Thumbnail = thumbnail;
+        isUnlocked = unlocked;
+        unlockCost = cost;
 
 //        question = q;
 //        opta = oa;
@@ -72,6 +85,22 @@ public class LevelCoin {
 
     public void setThumbnail(int thumbnail) {
         Thumbnail = thumbnail;
+    }
+
+    public boolean isUnlocked() {
+        return isUnlocked;
+    }
+
+    public void setUnlocked(boolean unlocked) {
+        isUnlocked = unlocked;
+    }
+
+    public int getUnlockCost() {
+        return unlockCost;
+    }
+
+    public void setUnlockCost(int unlockCost) {
+        this.unlockCost = unlockCost;
     }
 
 

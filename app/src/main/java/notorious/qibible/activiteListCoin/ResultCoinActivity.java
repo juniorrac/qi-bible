@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import notorious.qibible.MenuActivityHome;
+import notorious.qibible.coin.MenuCoinActivity;
 import notorious.qibible.R;
 
 public class ResultCoinActivity extends AppCompatActivity {
@@ -42,7 +42,7 @@ public class ResultCoinActivity extends AppCompatActivity {
     }
 
     public void returnTop(View view) {
-        startActivity(new Intent(getApplicationContext(), MenuActivityHome.class));
+        startActivity(new Intent(getApplicationContext(), MenuCoinActivity.class));
         finish();
     }
 
@@ -57,7 +57,7 @@ public class ResultCoinActivity extends AppCompatActivity {
 //    }
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this, MenuActivityHome.class);
+        Intent intent = new Intent(this, MenuCoinActivity.class);
         startActivity(intent);
         finish();
     }

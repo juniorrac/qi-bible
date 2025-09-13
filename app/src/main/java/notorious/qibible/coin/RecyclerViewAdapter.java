@@ -2,8 +2,10 @@ package notorious.qibible.coin;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,6 +20,7 @@ import java.util.List;
 import notorious.qibible.R;
 import notorious.qibible.activiteListCoin.CultureGeneralActivity;
 import notorious.qibible.activiteListCoin.GeneseActivity;
+import notorious.qibible.activiteListCoin.EnhancedGeneseActivity;
 import notorious.qibible.activiteListCoin.JeanActivity;
 import notorious.qibible.activiteListCoin.MarcActivity;
 
@@ -43,16 +46,34 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, @SuppressLint("RecyclerView") final int position) {
-
-        holder.tv_book_title.setText(mData.get(position).getTitle());
-        holder.img_book_thumbnail.setImageResource(mData.get(position).getThumbnail());
+        LevelCoin book = mData.get(position);
+        
+        holder.tv_book_title.setText(book.getTitle());
+        holder.img_book_thumbnail.setImageResource(book.getThumbnail());
+        
+        // Si le livre est verrouillé, afficher un overlay ou changer l'apparence
+        if (!book.isUnlocked()) {
+            holder.tv_book_title.setText(book.getTitle() + "\n🔒 " + book.getUnlockCost() + " pts");
+            holder.img_book_thumbnail.setAlpha(0.5f); // Image grisée
+        } else {
+            holder.img_book_thumbnail.setAlpha(1.0f); // Image normale
+        }
+        
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                LevelCoin clickedBook = mData.get(position);
+                
+                // Si le livre est verrouillé, proposer de le débloquer
+                if (!clickedBook.isUnlocked()) {
+                    showUnlockDialog(v.getContext(), clickedBook, position);
+                    return;
+                }
 
+                // Si débloqué, ouvrir le livre normalement
                 switch (position){
                     case 0:
-                        Intent genese = new Intent(v.getContext(), GeneseActivity.class);
+                        Intent genese = new Intent(v.getContext(), EnhancedGeneseActivity.class);
                         genese.putExtra("Title",mData.get(position).getTitle());
                         genese.putExtra("Description",mData.get(position).getDescription());
                         genese.putExtra("Thumbnail",mData.get(position).getThumbnail());
@@ -98,6 +119,50 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             }
         });
 
+    }
+    
+    private void showUnlockDialog(Context context, LevelCoin book, int position) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("QUIZ_DATA", Context.MODE_PRIVATE);
+        int currentScore = sharedPreferences.getInt("TOTAL_SCORE", 0);
+        
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Débloquer: " + book.getTitle());
+        
+        if (currentScore >= book.getUnlockCost()) {
+            builder.setMessage("Voulez-vous débloquer ce livre pour " + book.getUnlockCost() + " points?\n\nVos points: " + currentScore);
+            builder.setPositiveButton("Débloquer", (dialog, which) -> {
+                // Débloquer le livre
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putInt("TOTAL_SCORE", currentScore - book.getUnlockCost());
+                
+                // Sauvegarder l'état débloqué selon le livre
+                switch (position) {
+                    case 1: editor.putBoolean("MATTHIEU_UNLOCKED", true); break;
+                    case 2: editor.putBoolean("JEAN_UNLOCKED", true); break;
+                    case 3: editor.putBoolean("LUC_UNLOCKED", true); break;
+                    case 4: editor.putBoolean("MARC_UNLOCKED", true); break;
+                    case 5: editor.putBoolean("CULTURE_UNLOCKED", true); break;
+                }
+                editor.apply();
+                
+                // Mettre à jour le livre et rafraîchir l'affichage
+                book.setUnlocked(true);
+                notifyItemChanged(position);
+                
+                Toast.makeText(context, book.getTitle() + " débloqué!", Toast.LENGTH_SHORT).show();
+                
+                // Redémarrer l'activité pour rafraîchir les points
+                if (context instanceof Activity) {
+                    ((Activity) context).recreate();
+                }
+            });
+        } else {
+            builder.setMessage("Points insuffisants!\n\nRequis: " + book.getUnlockCost() + " points\nVos points: " + currentScore + "\nManque: " + (book.getUnlockCost() - currentScore) + " points");
+            builder.setPositiveButton("OK", null);
+        }
+        
+        builder.setNegativeButton("Annuler", null);
+        builder.show();
     }
 
     @Override

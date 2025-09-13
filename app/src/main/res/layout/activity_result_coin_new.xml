@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/bleu"
+    android:padding="20dp">
+
+    <!-- Titre avec style moderne -->
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="🎉 RÉSULTATS 🎉"
+        android:textSize="28sp"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:layout_marginBottom="30dp"
+        android:textAlignment="center" />
+
+    <!-- Carte de résultats principale -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="30dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp"
+        android:backgroundTint="@android:color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="30dp"
+            android:gravity="center">
+
+            <!-- Score principal -->
+            <TextView
+                android:id="@+id/scoreText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="8/10"
+                android:textSize="48sp"
+                android:textColor="#2E7D32"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp" />
+
+            <!-- Pourcentage -->
+            <TextView
+                android:id="@+id/percentageText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="80% de réussite"
+                android:textSize="18sp"
+                android:textColor="#424242"
+                android:layout_marginBottom="20dp" />
+
+            <!-- Barre de progression -->
+            <ProgressBar
+                android:id="@+id/scoreProgressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:progress="80"
+                android:max="100"
+                android:progressTint="#4CAF50"
+                android:progressBackgroundTint="#E0E0E0"
+                android:layout_marginBottom="25dp" />
+
+            <!-- Points gagnés -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:background="@drawable/points_background"
+                android:padding="15dp"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="💰"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/pointsEarnedText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Points gagnés: "
+                    android:textSize="16sp"
+                    android:textColor="#333333"
+                    android:layout_marginStart="10dp" />
+
+                <TextView
+                    android:id="@+id/pointsValueText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+75"
+                    android:textSize="20sp"
+                    android:textColor="#FF6F00"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <!-- Total des points -->
+            <TextView
+                android:id="@+id/totalPointsText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total: 325 points"
+                android:textSize="16sp"
+                android:textColor="#666666" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <!-- Détails des difficultés -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="30dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="4dp"
+        android:backgroundTint="@android:color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📊 Détail des points"
+                android:textSize="18sp"
+                android:textColor="#333333"
+                android:textStyle="bold"
+                android:layout_marginBottom="15dp" />
+
+            <LinearLayout
+                android:id="@+id/difficultyBreakdown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                
+                <!-- Les détails seront ajoutés dynamiquement -->
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <!-- Bouton de retour stylisé -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/returnButton"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:text="🏠 Retour au menu"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        app:backgroundTint="#1976D2"
+        app:cornerRadius="30dp"
+        app:elevation="6dp"
+        android:onClick="returnTop" />
+
+</LinearLayout>
